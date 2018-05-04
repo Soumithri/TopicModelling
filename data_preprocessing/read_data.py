@@ -24,7 +24,7 @@ from functools32 import lru_cache
 import re
 
 
-TWEET_PER_USER = 1000
+TWEET_PER_USER = 3000
 
 
 # Input arguments
