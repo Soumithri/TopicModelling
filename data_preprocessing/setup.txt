@@ -1,0 +1,17 @@
+-------------------  Version 1.0. -------------------------
+
+Note: MongoDB environmnet and output files are hardcoded inside the python files.
+      Later will be written as executable files for passing the parameters.
+
+
+
+1) Create the unique list of users from the MongoDB collection_name
+
+   Run the python file : "get_unique_users.py"
+
+   Ex: python data_preprocessing/get_unique_users.py
+
+2) Install the python and nltk libraries before running the "read_data.py" python file.
+
+
+   Ex: python data_preprocessing/read_data.py [-h] historical_tweets2  unique_users_list_test.csv preprocessed_data
