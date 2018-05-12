@@ -1,6 +1,10 @@
 mongodb
 unique_users_list*
 historical_tweets*
-Data_preprocess_log.rtf
+Data_preprocess_log*
 data
 ldaModels
+lda_train
+gensim_lda.pyc*
+lda/plots
+lda/metrics

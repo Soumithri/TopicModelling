@@ -12,7 +12,7 @@ class build_models():
     def __init__(self):
         self.colnames = {'userid', 'text'}
         # Create an empty dataframe
-        self.df = pd.read_csv('./historical_tweets2/preprocessed_data_s_username.csv',
+        self.df = pd.read_csv('./historical_tweets2/data_prepocessed_s_username.csv',
                                 names=['userid', 'text'], header=None)
         self.df = self.df.dropna(subset=['text'])
         #unique_user_list = self.df.userid.unique()
@@ -25,21 +25,23 @@ class build_models():
         documents = self.create_documents()
         pprint(len(documents))
         dictionary, dt_matrix = self.doc_term_matrix(documents)
-        ldamodel = self.lda(dt_matrix, num_topics=50, id2word = dictionary, passes=50,
+        ldamodel = self.lda(dt_matrix, num_topics=10, id2word = dictionary, passes=50,
                             update_every=1)
-        print(ldamodel.print_topics(num_topics=20, num_words=10))
-        vis_data = pyLDAvis.gensim.prepare(ldamodel, dt_matrix, dictionary)
-        pyLDAvis.show(vis_data)
+        pprint(lda_model.print_topics())
+        #pprint(ldamodel.print_topics(num_topics=20, num_words=10))
+        lda_model.save('./data/lda_10.model')
+        # vis_data = pyLDAvis.gensim.prepare(ldamodel, dt_matrix, dictionary)
+        # pyLDAvis.show(vis_data)
 
     def doc_term_matrix(self, documents):
         # Creating the dictionary of our Corpus
         dictionary = corpora.Dictionary(documents)
         # Save dictionatary
-        dictionary.save('./ldaModels/gensimLDA/tweets.dict')
+        dictionary.save('./ldaModels/gensimLDA20/tweets.dict')
         # Creating the term-document doc_term_matrix
         doc_term_matrix = [dictionary.doc2bow(doc) for doc in documents]
         # Storing in the DT matrix for later use
-        corpora.MmCorpus.serialize('./ldaModels/gensimLDA/tweets.mm', doc_term_matrix)
+        corpora.MmCorpus.serialize('./ldaModels/gensimLDA20/tweets.mm', doc_term_matrix)
         return dictionary, doc_term_matrix
 
     def create_documents(self):
